@@ -17,8 +17,8 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -70,8 +70,29 @@ body {
   table {
     font-size: 0.875rem;
   }
-  
-  th, td {
+
+  th,
+  td {
     padding: 0.5rem !important;
+  }
+
+  /* Hide table on mobile - cards will show instead */
+  .hide-on-mobile {
+    display: none;
+  }
+}
+
+/* Responsive utilities */
+@media (max-width: 640px) {
+  .flex-wrap-mobile {
+    flex-wrap: wrap;
+  }
+}
+
+/* Ensure modals are centered and responsive */
+@media (max-width: 640px) {
+  .modal-responsive {
+    max-width: 95vw;
+    margin: 1rem;
   }
 }

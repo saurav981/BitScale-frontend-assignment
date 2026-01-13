@@ -1,11 +1,18 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { ChevronRight, ChevronDown, Users, ExternalLink, Check, AlertCircle } from 'lucide-react';
-import { CompanyData } from '@/types';
-import { getFaviconUrl, getCompanyDomain } from '@/lib/utils';
-import EmailStatusDropdown from './EmailStatusDropdown';
-import Image from 'next/image';
+import { useState } from "react";
+import {
+  ChevronRight,
+  ChevronDown,
+  Users,
+  ExternalLink,
+  Check,
+  AlertCircle,
+} from "lucide-react";
+import { CompanyData } from "@/types";
+import { getFaviconUrl, getCompanyDomain } from "@/lib/utils";
+import EmailStatusDropdown from "./EmailStatusDropdown";
+import Image from "next/image";
 
 interface DataTableRowProps {
   data: CompanyData;
@@ -21,7 +28,7 @@ export default function DataTableRow({ data, index }: DataTableRowProps) {
     const rect = e.currentTarget.getBoundingClientRect();
     setDropdownPosition({
       top: rect.bottom + window.scrollY + 4,
-      left: rect.left + window.scrollX
+      left: rect.left + window.scrollX,
     });
     setShowEmailDropdown(!showEmailDropdown);
   };
@@ -31,23 +38,23 @@ export default function DataTableRow({ data, index }: DataTableRowProps) {
 
   return (
     <>
-      <tr className={`border-b border-gray-200 hover:bg-gray-50 transition-colors ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
-        <td className="px-4 py-3 whitespace-nowrap">
+      <tr className="hover:bg-gray-50 transition-colors bg-white">
+        <td className="px-4 py-3 whitespace-nowrap border-r border-b border-gray-200">
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsExpanded(!isExpanded)}
               className="p-0.5 hover:bg-gray-200 rounded transition-colors"
             >
               {isExpanded ? (
-                <ChevronDown className="w-4 h-4 text-gray-600" />
+                <ChevronDown className="w-4 h-4 text-neutral-600" />
               ) : (
-                <ChevronRight className="w-4 h-4 text-gray-600" />
+                <ChevronRight className="w-4 h-4 text-neutral-600" />
               )}
             </button>
-            <span className="text-sm text-gray-600">{data.id}</span>
+            <span className="text-sm text-neutral-700">{data.id}</span>
           </div>
         </td>
-        <td className="px-4 py-3 whitespace-nowrap">
+        <td className="px-4 py-3 whitespace-nowrap border-r border-b border-gray-200">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
@@ -56,10 +63,10 @@ export default function DataTableRow({ data, index }: DataTableRowProps) {
             <span className="text-sm font-medium">{data.name}</span>
           </button>
         </td>
-        <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-600">
+        <td className="px-4 py-3 whitespace-nowrap text-sm text-neutral-700 border-r border-b border-gray-200">
           {data.lastUpdated}
         </td>
-        <td className="px-4 py-3 whitespace-nowrap">
+        <td className="px-4 py-3 whitespace-nowrap border-r border-b border-gray-200">
           <div className="flex items-center gap-2">
             <Image
               src={faviconUrl}
@@ -69,41 +76,41 @@ export default function DataTableRow({ data, index }: DataTableRowProps) {
               className="w-4 h-4"
               unoptimized
             />
-            <span className="text-sm">{data.company}</span>
+            <span className="text-sm text-neutral-800">{data.company}</span>
           </div>
         </td>
-        <td className="px-4 py-3 whitespace-nowrap">
+        <td className="px-4 py-3 whitespace-nowrap border-r border-b border-gray-200">
           <a
             href={data.companyWebsite}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-blue-600 hover:text-blue-700 text-sm"
+            className="flex items-center gap-1 text-neutral-800 hover:text-neutral-900 text-sm"
           >
             <ExternalLink className="w-3 h-3" />
             <span>{data.companyWebsite}</span>
           </a>
         </td>
-        <td className="px-4 py-3 whitespace-nowrap">
+        <td className="px-4 py-3 whitespace-nowrap border-r border-b border-gray-200">
           <a
             href={data.linkedinJobUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-blue-600 hover:text-blue-700 text-sm"
+            className="flex items-center gap-1 text-neutral-800 hover:text-neutral-900 text-sm"
           >
             <ExternalLink className="w-3 h-3" />
             <span>{data.linkedinJobUrl}</span>
           </a>
         </td>
-        <td className="px-4 py-3 whitespace-nowrap">
+        <td className="px-4 py-3 whitespace-nowrap border-r border-b border-gray-200">
           <button
             onClick={handleEmailClick}
             className={`flex items-center gap-2 px-3 py-1 rounded text-sm font-medium transition-all hover:shadow-md ${
-              data.emailStatus === 'found'
-                ? 'bg-green-50 text-green-700 hover:bg-green-100'
-                : 'bg-orange-50 text-orange-700 hover:bg-orange-100'
+              data.emailStatus === "found"
+                ? "bg-green-50 text-green-700 hover:bg-green-100"
+                : "bg-orange-50 text-orange-700 hover:bg-orange-100"
             }`}
           >
-            {data.emailStatus === 'found' ? (
+            {data.emailStatus === "found" ? (
               <>
                 <Check className="w-4 h-4" />
                 <span>Email Found</span>
@@ -116,7 +123,7 @@ export default function DataTableRow({ data, index }: DataTableRowProps) {
             )}
           </button>
         </td>
-        <td className="px-4 py-3 whitespace-nowrap">
+        <td className="px-4 py-3 whitespace-nowrap border-b border-gray-200">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className="p-1 hover:bg-gray-200 rounded transition-colors"
@@ -125,34 +132,46 @@ export default function DataTableRow({ data, index }: DataTableRowProps) {
           </button>
         </td>
       </tr>
-      
+
       {isExpanded && data.expanded && (
-        <tr className="bg-blue-50 border-b border-gray-200">
-          <td colSpan={8} className="px-4 py-4">
+        <tr className="bg-blue-50">
+          <td colSpan={8} className="px-4 py-4 border-b border-gray-200">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 ml-8">
               <div>
-                <p className="text-xs text-gray-500 mb-1">Phone Number</p>
-                <p className="text-sm font-medium">{data.expanded.phoneNumber}</p>
+                <p className="text-xs text-neutral-600 mb-1">Phone Number</p>
+                <p className="text-sm font-medium text-neutral-900">
+                  {data.expanded.phoneNumber}
+                </p>
               </div>
               <div>
-                <p className="text-xs text-gray-500 mb-1">Job Title</p>
-                <p className="text-sm font-medium">{data.expanded.jobTitle}</p>
+                <p className="text-xs text-neutral-600 mb-1">Job Title</p>
+                <p className="text-sm font-medium text-neutral-900">
+                  {data.expanded.jobTitle}
+                </p>
               </div>
               <div>
-                <p className="text-xs text-gray-500 mb-1">Location</p>
-                <p className="text-sm font-medium">{data.expanded.location}</p>
+                <p className="text-xs text-neutral-600 mb-1">Location</p>
+                <p className="text-sm font-medium text-neutral-900">
+                  {data.expanded.location}
+                </p>
               </div>
               <div>
-                <p className="text-xs text-gray-500 mb-1">Company Size</p>
-                <p className="text-sm font-medium">{data.expanded.companySize} employees</p>
+                <p className="text-xs text-neutral-600 mb-1">Company Size</p>
+                <p className="text-sm font-medium text-neutral-900">
+                  {data.expanded.companySize} employees
+                </p>
               </div>
               <div>
-                <p className="text-xs text-gray-500 mb-1">Industry</p>
-                <p className="text-sm font-medium">{data.expanded.industry}</p>
+                <p className="text-xs text-neutral-600 mb-1">Industry</p>
+                <p className="text-sm font-medium text-neutral-900">
+                  {data.expanded.industry}
+                </p>
               </div>
               <div>
-                <p className="text-xs text-gray-500 mb-1">Last Contact</p>
-                <p className="text-sm font-medium">{data.expanded.lastContact}</p>
+                <p className="text-xs text-neutral-600 mb-1">Last Contact</p>
+                <p className="text-sm font-medium text-neutral-900">
+                  {data.expanded.lastContact}
+                </p>
               </div>
             </div>
           </td>

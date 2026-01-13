@@ -1,39 +1,47 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { Check, X, RefreshCw, Mail, Play } from 'lucide-react';
+import { useState, useRef, useEffect } from "react";
+import { Check, X, RefreshCw, Mail, Play } from "lucide-react";
 
 interface EmailStatusDropdownProps {
-  status: 'found' | 'not-met';
+  status: "found" | "not-met";
   onClose: () => void;
   position: { top: number; left: number };
 }
 
-export default function EmailStatusDropdown({ status, onClose, position }: EmailStatusDropdownProps) {
+export default function EmailStatusDropdown({
+  status,
+  onClose,
+  position,
+}: EmailStatusDropdownProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         onClose();
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
-  const actions = status === 'found' 
-    ? [
-        { icon: Mail, label: 'View Email', color: 'text-blue-600' },
-        { icon: RefreshCw, label: 'Re-verify', color: 'text-gray-600' },
-        { icon: X, label: 'Mark as Invalid', color: 'text-red-600' }
-      ]
-    : [
-        { icon: Play, label: 'Retry Enrichment', color: 'text-blue-600' },
-        { icon: RefreshCw, label: 'Force Run', color: 'text-orange-600' },
-        { icon: X, label: 'Skip', color: 'text-gray-600' }
-      ];
+  const actions =
+    status === "found"
+      ? [
+          { icon: Mail, label: "View Email", color: "text-blue-600" },
+          { icon: RefreshCw, label: "Re-verify", color: "text-gray-600" },
+          { icon: X, label: "Mark as Invalid", color: "text-red-600" },
+        ]
+      : [
+          { icon: Play, label: "Retry Enrichment", color: "text-blue-600" },
+          { icon: RefreshCw, label: "Force Run", color: "text-orange-600" },
+          { icon: X, label: "Skip", color: "text-gray-600" },
+        ];
 
   return (
     <div
@@ -48,7 +56,7 @@ export default function EmailStatusDropdown({ status, onClose, position }: Email
           onClick={onClose}
         >
           <action.icon className={`w-4 h-4 ${action.color}`} />
-          <span className="text-sm">{action.label}</span>
+          <span className="text-sm text-neutral-800">{action.label}</span>
         </button>
       ))}
     </div>

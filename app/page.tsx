@@ -109,39 +109,46 @@ export default function Home() {
   const availableCompanies = getUniqueCompanies(allData);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
-      <Header />
-      <PaymentBanner />
-      <Toolbar
-        totalRows={filteredData.length}
-        visibleColumns={16}
-        totalColumns={20}
-        onFilterClick={() => setShowFilterModal(true)}
-        onSortClick={() => setShowSortModal(true)}
-      />
+    <div className="h-screen bg-gray-100 flex flex-col overflow-hidden">
+      <div className="overflow-auto flex-1">
+        <Header />
+        <PaymentBanner />
 
-      <div className="flex-1 overflow-auto">
-        <DataTable
-          data={displayedData}
-          onSort={handleSort}
-          sortField={sortField}
-          sortOrder={sortOrder}
-        />
+        <div className="sticky top-0 z-20 bg-white">
+          <Toolbar
+            totalRows={filteredData.length}
+            visibleColumns={16}
+            totalColumns={20}
+            onFilterClick={() => setShowFilterModal(true)}
+            onSortClick={() => setShowSortModal(true)}
+          />
+        </div>
 
-        {isLoadingMore && <LoadingSpinner />}
+        <div className="bg-white">
+          <DataTable
+            data={displayedData}
+            onSort={handleSort}
+            sortField={sortField}
+            sortOrder={sortOrder}
+          />
 
-        {hasMore && !isLoadingMore && (
-          <div ref={observerTarget} className="h-20" />
-        )}
+          {isLoadingMore && <LoadingSpinner />}
 
-        {!hasMore && (
-          <div className="text-center py-8 text-gray-500 text-sm">
-            No more data to load
-          </div>
-        )}
+          {hasMore && !isLoadingMore && (
+            <div ref={observerTarget} className="h-20" />
+          )}
+
+          {!hasMore && (
+            <div className="text-center py-8 text-neutral-500 text-sm">
+              No more data to load
+            </div>
+          )}
+        </div>
       </div>
 
-      <BottomTabs />
+      <div className="sticky bottom-0 z-10">
+        <BottomTabs />
+      </div>
 
       <FilterModal
         isOpen={showFilterModal}

@@ -2,6 +2,7 @@
 
 import { X, Search } from "lucide-react";
 import { FilterOptions } from "@/types";
+import { useEffect, useRef } from "react";
 
 interface FilterModalProps {
   isOpen: boolean;
@@ -18,6 +19,27 @@ export default function FilterModal({
   onFiltersChange,
   availableCompanies,
 }: FilterModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const handleCompanyToggle = (company: string) => {
@@ -40,25 +62,28 @@ export default function FilterModal({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[80vh] overflow-hidden">
+      <div
+        ref={modalRef}
+        className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[80vh] overflow-hidden"
+      >
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold">Filters</h2>
+          <h2 className="text-lg font-semibold text-neutral-900">Filters</h2>
           <button
             onClick={onClose}
             className="p-1 hover:bg-gray-100 rounded transition-colors"
           >
-            <X className="w-5 h-5" />
+            <X className="w-5 h-5 text-neutral-700" />
           </button>
         </div>
 
         <div className="p-4 overflow-y-auto max-h-[calc(80vh-140px)]">
           {/* Search */}
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-neutral-900 mb-2">
               Search
             </label>
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-neutral-400" />
               <input
                 type="text"
                 value={filters.search}
@@ -66,14 +91,14 @@ export default function FilterModal({
                   onFiltersChange({ ...filters, search: e.target.value })
                 }
                 placeholder="Search by name, company..."
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-neutral-900"
               />
             </div>
           </div>
 
           {/* Companies */}
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-neutral-900 mb-2">
               Companies
             </label>
             <div className="space-y-2 max-h-48 overflow-y-auto">
@@ -88,7 +113,7 @@ export default function FilterModal({
                     onChange={() => handleCompanyToggle(company)}
                     className="w-4 h-4 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
                   />
-                  <span className="text-sm">{company}</span>
+                  <span className="text-sm text-neutral-800">{company}</span>
                 </label>
               ))}
             </div>
@@ -96,7 +121,7 @@ export default function FilterModal({
 
           {/* Email Status */}
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-neutral-900 mb-2">
               Email Status
             </label>
             <div className="space-y-2">
@@ -107,7 +132,7 @@ export default function FilterModal({
                   onChange={() => handleEmailStatusToggle("found")}
                   className="w-4 h-4 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
                 />
-                <span className="text-sm">Email Found</span>
+                <span className="text-sm text-neutral-800">Email Found</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
                 <input
@@ -116,7 +141,9 @@ export default function FilterModal({
                   onChange={() => handleEmailStatusToggle("not-met")}
                   className="w-4 h-4 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
                 />
-                <span className="text-sm">Run condition not met</span>
+                <span className="text-sm text-neutral-800">
+                  Run condition not met
+                </span>
               </label>
             </div>
           </div>
@@ -125,7 +152,7 @@ export default function FilterModal({
         <div className="flex items-center justify-between p-4 border-t border-gray-200">
           <button
             onClick={handleClearAll}
-            className="text-sm text-gray-600 hover:text-gray-900"
+            className="text-sm text-neutral-700 hover:text-neutral-900"
           >
             Clear all
           </button>

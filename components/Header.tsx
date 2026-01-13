@@ -1,41 +1,78 @@
-'use client';
+"use client";
 
-import { Home, Star, MessageCircle } from 'lucide-react';
+import { Home, Star, MessageCircle, Coins } from "lucide-react";
 
 export default function Header() {
   return (
     <header className="bg-white border-b border-gray-200 px-4 py-3">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div className="flex items-center gap-3 flex-wrap">
           <button className="p-1.5 hover:bg-gray-100 rounded transition-colors">
-            <Home className="w-5 h-5 text-gray-600" />
+            <Home className="w-5 h-5 text-neutral-600" />
           </button>
           <button className="p-1.5 hover:bg-gray-100 rounded transition-colors">
             <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
           </button>
-          <div className="text-sm text-gray-600">
-            <span>Workbook - Bitscale UX/UI testing flow</span>
-            <span className="mx-2 text-gray-400">/</span>
+          <div className="text-neutral-700 font-semibold">
+            <span className="text-neutral-400">
+              Workbook - Bitscale UX/UI testing flow
+            </span>
+            <span className="mx-2 text-neutral-400">/</span>
             <span>Bitscale grid only</span>
           </div>
         </div>
-        
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <div className="text-sm text-gray-600">Grid running</div>
+
+        <div className="flex items-center gap-4 flex-wrap">
+          {/* <div className="flex items-center gap-2">
+            <div className="text-sm text-neutral-700">Grid running</div>
             <div className="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
               <div className="h-full bg-blue-600 w-[10%]" />
             </div>
-            <div className="text-sm font-medium text-gray-700">10%</div>
-          </div>
-          
+            <div className="text-sm font-medium text-neutral-800">10%</div>
+          </div> */}
+
           <button className="p-1.5 hover:bg-gray-100 rounded transition-colors">
-            <MessageCircle className="w-5 h-5 text-gray-600" />
+            <MessageCircle className="w-5 h-5 text-neutral-600" />
           </button>
-          
-          <div className="flex items-center gap-2 text-sm">
-            <span className="text-gray-600">500/500</span>
-            <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">
+
+          {/* <div className="flex items-center gap-2 text-sm bg-green-100">
+            <span className="text-neutral-700">500/500</span>
+            <span className="bg-green-700 px-2 py-1 rounded-full text-xs font-medium">
+              Free
+            </span>
+          </div> */}
+
+          <div className="inline-flex items-center gap-3 bg-[#EBF5F0] px-2 py-1 rounded-lg">
+            <div className="flex items-center gap-2 text-[#327B55]">
+              <svg
+                width="16"
+                height="12"
+                viewBox="0 0 16 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clip-path="url(#clip0_1_5706)">
+                  <path
+                    opacity="0.2"
+                    d="M15.4667 6.13337C15.4667 7.4587 13.0787 8.53337 10.1333 8.53337C8.82666 8.53337 7.62933 8.32203 6.70199 7.9707C9.25066 7.79003 11.2 6.80003 11.2 5.60003V3.78137C13.6347 4.00403 15.4667 4.97203 15.4667 6.13337ZM11.2 2.93337C11.2 1.60803 8.81199 0.533365 5.86666 0.533365C2.92133 0.533365 0.533325 1.60803 0.533325 2.93337C0.533325 4.2587 2.92133 5.33337 5.86666 5.33337C8.81199 5.33337 11.2 4.2587 11.2 2.93337Z"
+                    fill="#438361"
+                  />
+                  <path
+                    d="M11.7333 3.3047V2.93337C11.7333 1.26137 9.21133 3.24249e-05 5.86667 3.24249e-05C2.522 3.24249e-05 0 1.26137 0 2.93337V5.60003C0 6.9927 1.75 8.09937 4.26667 8.4307V8.80003C4.26667 10.472 6.78867 11.7334 10.1333 11.7334C13.478 11.7334 16 10.472 16 8.80003V6.13337C16 4.75337 14.3053 3.64537 11.7333 3.3047ZM14.9333 6.13337C14.9333 7.0147 12.8807 8.00003 10.1333 8.00003C9.88467 8.00003 9.638 7.99137 9.39467 7.97537C10.8327 7.45137 11.7333 6.60003 11.7333 5.60003V4.3827C13.7247 4.67937 14.9333 5.4847 14.9333 6.13337ZM4.26667 7.35003V5.76403C4.79719 5.83311 5.33167 5.86741 5.86667 5.8667C6.40167 5.86741 6.93613 5.83311 7.46667 5.76403V7.35003C6.93693 7.4283 6.40215 7.4673 5.86667 7.4667C5.33119 7.4673 4.7964 7.4283 4.26667 7.35003ZM10.6667 4.66203V5.60003C10.6667 6.15937 9.83933 6.76003 8.53333 7.1247V5.5667C9.394 5.35803 10.1227 5.04737 10.6667 4.66203ZM5.86667 1.0667C8.614 1.0667 10.6667 2.05203 10.6667 2.93337C10.6667 3.8147 8.614 4.80003 5.86667 4.80003C3.11933 4.80003 1.06667 3.8147 1.06667 2.93337C1.06667 2.05203 3.11933 1.0667 5.86667 1.0667ZM1.06667 5.60003V4.66203C1.61067 5.04737 2.33933 5.35803 3.2 5.5667V7.1247C1.894 6.76003 1.06667 6.15937 1.06667 5.60003ZM5.33333 8.80003V8.52203C5.50867 8.5287 5.686 8.53337 5.86667 8.53337C6.12533 8.53337 6.378 8.5247 6.626 8.51003C6.90153 8.60863 7.18213 8.6923 7.46667 8.7607V10.3247C6.16067 9.96003 5.33333 9.35937 5.33333 8.80003ZM8.53333 10.55V8.96003C9.06367 9.0313 9.5982 9.06697 10.1333 9.0667C10.6683 9.06743 11.2028 9.0331 11.7333 8.96403V10.55C10.6723 10.7056 9.59433 10.7056 8.53333 10.55ZM12.8 10.3247V8.7667C13.6607 8.55803 14.3893 8.24737 14.9333 7.86203V8.80003C14.9333 9.35937 14.106 9.96003 12.8 10.3247Z"
+                    fill="#438361"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_1_5706">
+                    <rect width="16" height="11.7333" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+
+              <span className="text-sm tracking-wide">500/500</span>
+            </div>
+
+            <span className="bg-[#438361] text-white text-xs font-semibold px-2 py-1 rounded-lg">
               Free
             </span>
           </div>

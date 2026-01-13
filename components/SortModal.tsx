@@ -2,6 +2,7 @@
 
 import { X, ArrowUp, ArrowDown } from "lucide-react";
 import { SortField, SortOrder } from "@/types";
+import { useEffect, useRef } from "react";
 
 interface SortModalProps {
   isOpen: boolean;
@@ -18,6 +19,27 @@ export default function SortModal({
   sortOrder,
   onSort,
 }: SortModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const sortOptions: { field: SortField; label: string }[] = [
@@ -35,14 +57,17 @@ export default function SortModal({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-md w-full">
+      <div
+        ref={modalRef}
+        className="bg-white rounded-lg shadow-xl max-w-md w-full"
+      >
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold">Sort By</h2>
+          <h2 className="text-lg font-semibold text-neutral-900">Sort By</h2>
           <button
             onClick={onClose}
             className="p-1 hover:bg-gray-100 rounded transition-colors"
           >
-            <X className="w-5 h-5" />
+            <X className="w-5 h-5 text-neutral-700" />
           </button>
         </div>
 
@@ -58,7 +83,9 @@ export default function SortModal({
                     : "border border-transparent"
                 }`}
               >
-                <span className="text-sm font-medium">{option.label}</span>
+                <span className="text-sm font-medium text-neutral-900">
+                  {option.label}
+                </span>
                 {sortField === option.field && (
                   <div className="flex items-center gap-1">
                     {sortOrder === "asc" ? (

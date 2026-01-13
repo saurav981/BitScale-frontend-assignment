@@ -9,20 +9,20 @@ export default function PaymentBanner() {
   if (!isVisible) return null;
 
   return (
-    <div className="bg-red-600 text-white px-4 py-3 flex items-center justify-center gap-8">
+    <div className="bg-[#c81e1e] text-white px-4 py-3 flex items-center justify-center gap-8">
       <div className="flex items-center gap-3">
-        <p className="text-sm font-medium">
+        <p className="font-medium">
           Payment failed. 450,000 credits will permanently expire in 30 days
         </p>
         <AlertCircle className="w-5 h-5 flex-shrink-0" />
       </div>
       <div className="flex items-center gap-3">
-        <button className="bg-white text-red-600 px-4 py-1.5 rounded font-medium text-sm hover:bg-gray-100 transition-colors">
+        <button className="bg-white text-neutral-700 font-semibold px-4 py-1 rounded-lg text-sm hover:bg-gray-100 transition-colors shadow-2xl">
           Pay Now
         </button>
         <button
           onClick={() => setIsVisible(false)}
-          className="hover:bg-red-700 p-1 rounded transition-colors"
+          className="hover:bg-red-800 p-1 rounded-lg transition-colors"
           aria-label="Close banner"
         >
           <X className="w-5 h-5" />
