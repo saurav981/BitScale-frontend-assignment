@@ -12,6 +12,7 @@ import BottomTabs from "@/components/BottomTabs";
 import FilterModal from "@/components/FilterModal";
 import SortModal from "@/components/SortModal";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import RowDetailsModal from "@/components/RowDetailsModal";
 
 export default function Home() {
   const [allData, setAllData] = useState<CompanyData[]>(initialMockData);
@@ -31,6 +32,8 @@ export default function Home() {
 
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [showSortModal, setShowSortModal] = useState(false);
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [selectedRow, setSelectedRow] = useState<CompanyData | null>(null);
 
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(true);
@@ -106,6 +109,16 @@ export default function Home() {
     }
   };
 
+  const handleRowClick = (data: CompanyData) => {
+    setSelectedRow(data);
+    setShowDetailsModal(true);
+  };
+
+  const handleCloseDetailsModal = () => {
+    setShowDetailsModal(false);
+    setSelectedRow(null);
+  };
+
   const availableCompanies = getUniqueCompanies(allData);
 
   return (
@@ -130,6 +143,7 @@ export default function Home() {
             onSort={handleSort}
             sortField={sortField}
             sortOrder={sortOrder}
+            onRowClick={handleRowClick}
           />
 
           {isLoadingMore && <LoadingSpinner />}
@@ -167,6 +181,12 @@ export default function Home() {
           handleSort(field, order);
           setShowSortModal(false);
         }}
+      />
+
+      <RowDetailsModal
+        isOpen={showDetailsModal}
+        onClose={handleCloseDetailsModal}
+        data={selectedRow}
       />
     </div>
   );
