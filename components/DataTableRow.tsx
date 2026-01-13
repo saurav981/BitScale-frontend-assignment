@@ -38,7 +38,7 @@ export default function DataTableRow({ data }: DataTableRowProps) {
           </div>
         </td>
 
-        {/* Date */}
+        {/* Name */}
         <td className="px-4 py-3 whitespace-nowrap border-r border-b border-gray-200">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
@@ -78,35 +78,41 @@ export default function DataTableRow({ data }: DataTableRowProps) {
           </div>
         </td>
 
-        {/* Company website */}
-        <td className="px-4 py-3 truncate border-r border-b border-gray-200">
+        {/* Company website - Fixed width with truncate */}
+        <td className="px-4 py-3 border-r border-b border-gray-200 w-48 max-w-[12rem]">
           <a
             href={data.companyWebsite}
             target="_blank"
             rel="noopener noreferrer"
+            title={data.companyWebsite}
             className="flex items-center gap-2 text-neutral-800 hover:text-neutral-900 text-sm"
           >
             <ExternalLink
               className="size-4 shrink-0 text-neutral-400"
               strokeWidth={2.5}
             />
-            <span className="text-neutral-600">{data.companyWebsite}</span>
+            <span className="text-neutral-600 truncate">
+              {data.companyWebsite}
+            </span>
           </a>
         </td>
 
-        {/* Linkedin url */}
-        <td className="px-4 py-3 truncate border-r border-b border-gray-200">
+        {/* Linkedin url - Fixed width with truncate */}
+        <td className="px-4 py-3 border-r border-b border-gray-200 w-48 max-w-[12rem]">
           <a
             href={data.linkedinJobUrl}
             target="_blank"
             rel="noopener noreferrer"
+            title={data.linkedinJobUrl}
             className="flex items-center gap-2 text-neutral-800 hover:text-neutral-900 text-sm"
           >
             <ExternalLink
               className="size-4 shrink-0 text-neutral-400"
               strokeWidth={2.5}
             />
-            <span className="text-neutral-600">{data.linkedinJobUrl}</span>
+            <span className="text-neutral-600 truncate">
+              {data.linkedinJobUrl}
+            </span>
           </a>
         </td>
 

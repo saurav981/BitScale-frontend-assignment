@@ -34,11 +34,11 @@ export default function DataTable({ data, onSort, sortField }: DataTableProps) {
     width?: string;
   }) => (
     <th
-      className={`px-4 py-3 text-left text-xs font-semibold text-neutral-600 tracking-wide cursor-pointer hover:bg-gray-100 hover:text-neutral-700 transition-colors select-none group sticky top-0 bg-gray-50 z-10 border-b border-gray-200 ${width}`}
+      className={`px-4 py-3 text-left text-sm font-semibold text-neutral-600 tracking-wide cursor-pointer hover:bg-gray-100 hover:text-neutral-700 transition-colors select-none group sticky top-0 bg-gray-50 z-10 border-b border-gray-200 ${width}`}
       onClick={() => onSort(field)}
     >
       <div className="flex items-center gap-2 ">
-        <Icon className="w-3.5 h-3.5 text-neutral-500 group-hover:text-neutral-600 transition-colors shrink-0" />
+        <Icon className="size-4 text-neutral-500 group-hover:text-neutral-600 transition-colors shrink-0" />
         <span>{label}</span>
         <ArrowUpDown
           className={`w-3 h-3 transition-opacity duration-200 ${
@@ -76,17 +76,17 @@ export default function DataTable({ data, onSort, sortField }: DataTableProps) {
               />
 
               {/* Company Website */}
-              <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 tracking-wide sticky top-0 bg-gray-50 z-10 border-b border-gray-200">
+              <th className="px-4 py-3 text-left text-sm font-semibold text-neutral-600 tracking-wide sticky top-0 bg-gray-50 z-10 border-b border-gray-200 w-48">
                 <div className="flex items-center gap-2">
-                  <Globe className="w-3.5 h-3.5 text-neutral-500" />
+                  <Globe className="size-4 text-neutral-500" />
                   <span>Company Website</span>
                 </div>
               </th>
 
               {/* LinkedIn Job URL */}
-              <th className="px-4 py-3 text-left text-xs font-semibold text-neutral-600 tracking-wide sticky top-0 bg-gray-50 z-10 border-b border-gray-200">
+              <th className="px-4 py-3 text-left text-sm font-semibold text-neutral-600 tracking-wide sticky top-0 bg-gray-50 z-10 border-b border-gray-200 w-48">
                 <div className="flex items-center gap-2">
-                  <Linkedin className="w-3.5 h-3.5 text-neutral-500" />
+                  <Linkedin className="size-4 text-neutral-500" />
                   <span>LinkedIn Job URL</span>
                 </div>
               </th>

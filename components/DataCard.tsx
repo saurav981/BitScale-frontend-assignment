@@ -113,27 +113,29 @@ export default function DataCard({ data }: DataCardProps) {
         {isExpanded && data.expanded && (
           <div className="mt-4 pt-4 border-t border-gray-200 ml-8">
             <div className="space-y-3">
-              {/* Website */}
+              {/* Website - with truncate */}
               <div className="flex items-start gap-2">
                 <Globe className="w-4 h-4 text-neutral-500 flex-shrink-0 mt-0.5" />
                 <a
                   href={data.companyWebsite}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-neutral-800 hover:text-blue-600 break-all"
+                  title={data.companyWebsite}
+                  className="text-sm text-neutral-800 hover:text-blue-600 truncate block"
                 >
                   {data.companyWebsite}
                 </a>
               </div>
 
-              {/* LinkedIn */}
+              {/* LinkedIn - with truncate */}
               <div className="flex items-start gap-2">
                 <Linkedin className="w-4 h-4 text-neutral-500 flex-shrink-0 mt-0.5" />
                 <a
                   href={data.linkedinJobUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-neutral-800 hover:text-blue-600 break-all"
+                  title={data.linkedinJobUrl}
+                  className="text-sm text-neutral-800 hover:text-blue-600 truncate block"
                 >
                   {data.linkedinJobUrl}
                 </a>
