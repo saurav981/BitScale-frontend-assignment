@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { Check, X, RefreshCw, Mail, Play } from "lucide-react";
+import { useRef, useEffect } from "react";
+import { X, RefreshCw, Mail, Play } from "lucide-react";
 
 interface EmailStatusDropdownProps {
   status: "found" | "not-met";
