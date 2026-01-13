@@ -1,14 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  ChevronRight,
-  ChevronDown,
-  Users,
-  ExternalLink,
-  Check,
-  AlertCircle,
-} from "lucide-react";
+import { ChevronRight, ChevronDown, Users, ExternalLink } from "lucide-react";
 import { CompanyData } from "@/types";
 import { getFaviconUrl, getCompanyDomain } from "@/lib/utils";
 import EmailStatusDropdown from "./EmailStatusDropdown";
@@ -19,7 +12,7 @@ interface DataTableRowProps {
   index: number;
 }
 
-export default function DataTableRow({ data, index }: DataTableRowProps) {
+export default function DataTableRow({ data }: DataTableRowProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [showEmailDropdown, setShowEmailDropdown] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
@@ -40,32 +33,37 @@ export default function DataTableRow({ data, index }: DataTableRowProps) {
     <>
       <tr className="hover:bg-gray-50 transition-colors bg-white">
         <td className="px-4 py-3 whitespace-nowrap border-r border-b border-gray-200">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="p-0.5 hover:bg-gray-200 rounded transition-colors"
-            >
-              {isExpanded ? (
-                <ChevronDown className="w-4 h-4 text-neutral-600" />
-              ) : (
-                <ChevronRight className="w-4 h-4 text-neutral-600" />
-              )}
-            </button>
+          <div className="grid place-content-center gap-2">
             <span className="text-sm text-neutral-700">{data.id}</span>
           </div>
         </td>
+
+        {/* Date */}
         <td className="px-4 py-3 whitespace-nowrap border-r border-b border-gray-200">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
+            className="flex bg-blue-100/70 px-3 py-1 w-full rounded-full items-center gap-2 hover:text-blue-700 transition-colors"
           >
-            <Users className="w-4 h-4" />
-            <span className="text-sm font-medium">{data.name}</span>
+            <Users className="size-4 shrink-0 text-[#347fa9]" />
+            <span className="text-neutral-600 text-sm font-medium">
+              {data.name}
+            </span>
+            <div onClick={() => setIsExpanded(!isExpanded)} className="ml-auto">
+              {isExpanded ? (
+                <ChevronDown className="size-4 shrink-0 text-neutral-500" />
+              ) : (
+                <ChevronRight className="size-4 shrink-0 text-neutral-500" />
+              )}
+            </div>
           </button>
         </td>
+
+        {/* Date */}
         <td className="px-4 py-3 whitespace-nowrap text-sm text-neutral-700 border-r border-b border-gray-200">
-          {data.lastUpdated}
+          {data.lastUpdated.replace(/,(?=[^,]*$)/, " at")}
         </td>
+
+        {/* Company name */}
         <td className="px-4 py-3 whitespace-nowrap border-r border-b border-gray-200">
           <div className="flex items-center gap-2">
             <Image
@@ -73,62 +71,64 @@ export default function DataTableRow({ data, index }: DataTableRowProps) {
               alt={data.company}
               width={16}
               height={16}
-              className="w-4 h-4"
+              className="w-4 h-4 shrink-0"
               unoptimized
             />
-            <span className="text-sm text-neutral-800">{data.company}</span>
+            <span className="text-sm text-neutral-700">{data.company}</span>
           </div>
         </td>
-        <td className="px-4 py-3 whitespace-nowrap border-r border-b border-gray-200">
+
+        {/* Company website */}
+        <td className="px-4 py-3 truncate border-r border-b border-gray-200">
           <a
             href={data.companyWebsite}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-neutral-800 hover:text-neutral-900 text-sm"
+            className="flex items-center gap-2 text-neutral-800 hover:text-neutral-900 text-sm"
           >
-            <ExternalLink className="w-3 h-3" />
-            <span>{data.companyWebsite}</span>
+            <ExternalLink
+              className="size-4 shrink-0 text-neutral-400"
+              strokeWidth={2.5}
+            />
+            <span className="text-neutral-600">{data.companyWebsite}</span>
           </a>
         </td>
-        <td className="px-4 py-3 whitespace-nowrap border-r border-b border-gray-200">
+
+        {/* Linkedin url */}
+        <td className="px-4 py-3 truncate border-r border-b border-gray-200">
           <a
             href={data.linkedinJobUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-neutral-800 hover:text-neutral-900 text-sm"
+            className="flex items-center gap-2 text-neutral-800 hover:text-neutral-900 text-sm"
           >
-            <ExternalLink className="w-3 h-3" />
-            <span>{data.linkedinJobUrl}</span>
+            <ExternalLink
+              className="size-4 shrink-0 text-neutral-400"
+              strokeWidth={2.5}
+            />
+            <span className="text-neutral-600">{data.linkedinJobUrl}</span>
           </a>
         </td>
+
+        {/* Email Waterfall */}
         <td className="px-4 py-3 whitespace-nowrap border-r border-b border-gray-200">
           <button
             onClick={handleEmailClick}
-            className={`flex items-center gap-2 px-3 py-1 rounded text-sm font-medium transition-all hover:shadow-md ${
+            className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium transition-all hover:shadow-md ${
               data.emailStatus === "found"
-                ? "bg-green-50 text-green-700 hover:bg-green-100"
-                : "bg-orange-50 text-orange-700 hover:bg-orange-100"
+                ? "bg-gray-100 w-full text-neutral-700 hover:bg-gray-200"
+                : "text-[#c27803] hover:bg-gray-200 italic"
             }`}
           >
             {data.emailStatus === "found" ? (
               <>
-                <Check className="w-4 h-4" />
-                <span>Email Found</span>
+                ✅<span>Email Found</span>
               </>
             ) : (
               <>
-                <AlertCircle className="w-4 h-4" />
                 <span>Run condition not met</span>
               </>
             )}
-          </button>
-        </td>
-        <td className="px-4 py-3 whitespace-nowrap border-b border-gray-200">
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="p-1 hover:bg-gray-200 rounded transition-colors"
-          >
-            <ChevronRight className="w-4 h-4 text-gray-400" />
           </button>
         </td>
       </tr>

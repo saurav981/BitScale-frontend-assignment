@@ -9,8 +9,6 @@ import {
   Calendar,
   Globe,
   Linkedin,
-  Check,
-  AlertCircle,
   Users,
 } from "lucide-react";
 import { CompanyData } from "@/types";
@@ -94,18 +92,16 @@ export default function DataCard({ data }: DataCardProps) {
               onClick={handleEmailClick}
               className={`flex items-center gap-2 px-3 py-1.5 rounded text-sm font-medium transition-all ${
                 data.emailStatus === "found"
-                  ? "bg-green-50 text-green-700 hover:bg-green-100"
-                  : "bg-orange-50 text-orange-700 hover:bg-orange-100"
+                  ? "bg-gray-100 w-full text-neutral-700 hover:bg-gray-200"
+                  : "text-[#c27803] hover:bg-gray-200 italic"
               }`}
             >
               {data.emailStatus === "found" ? (
                 <>
-                  <Check className="w-4 h-4" />
-                  <span>Email Found</span>
+                  ✅<span>Email Found</span>
                 </>
               ) : (
                 <>
-                  <AlertCircle className="w-4 h-4" />
                   <span>Run condition not met</span>
                 </>
               )}

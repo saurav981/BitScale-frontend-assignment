@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Star, MessageCircle, Coins } from "lucide-react";
+import { Home, Star, CloudCheck } from "lucide-react";
 
 export default function Header() {
   return (
@@ -23,26 +23,11 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-4 flex-wrap">
-          {/* <div className="flex items-center gap-2">
-            <div className="text-sm text-neutral-700">Grid running</div>
-            <div className="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
-              <div className="h-full bg-blue-600 w-[10%]" />
-            </div>
-            <div className="text-sm font-medium text-neutral-800">10%</div>
-          </div> */}
-
           <button className="p-1.5 hover:bg-gray-100 rounded transition-colors">
-            <MessageCircle className="w-5 h-5 text-neutral-600" />
+            <CloudCheck className="w-5 h-5 text-neutral-500" />
           </button>
 
-          {/* <div className="flex items-center gap-2 text-sm bg-green-100">
-            <span className="text-neutral-700">500/500</span>
-            <span className="bg-green-700 px-2 py-1 rounded-full text-xs font-medium">
-              Free
-            </span>
-          </div> */}
-
-          <div className="inline-flex items-center gap-3 bg-[#EBF5F0] px-2 py-1 rounded-lg">
+          <div className="inline-flex items-center gap-3 bg-[#EBF5F0] px-3 py-1 rounded-lg">
             <div className="flex items-center gap-2 text-[#327B55]">
               <svg
                 width="16"
@@ -51,7 +36,7 @@ export default function Header() {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <g clip-path="url(#clip0_1_5706)">
+                <g clipPath="url(#clip0_1_5706)">
                   <path
                     opacity="0.2"
                     d="M15.4667 6.13337C15.4667 7.4587 13.0787 8.53337 10.1333 8.53337C8.82666 8.53337 7.62933 8.32203 6.70199 7.9707C9.25066 7.79003 11.2 6.80003 11.2 5.60003V3.78137C13.6347 4.00403 15.4667 4.97203 15.4667 6.13337ZM11.2 2.93337C11.2 1.60803 8.81199 0.533365 5.86666 0.533365C2.92133 0.533365 0.533325 1.60803 0.533325 2.93337C0.533325 4.2587 2.92133 5.33337 5.86666 5.33337C8.81199 5.33337 11.2 4.2587 11.2 2.93337Z"

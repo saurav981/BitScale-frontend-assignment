@@ -12,7 +12,7 @@ export default function BottomTabs() {
     { id: "user-engagement", label: "User Engagement...", icon: null },
     { id: "customer-insights", label: "Customer Insights...", icon: null },
     { id: "audience-interact", label: "Audience Interact...", icon: null },
-    { id: "lead-generation", label: "Lead Generation...", icon: null },
+    // { id: "lead-generation", label: "Lead Generation...", icon: null },
   ];
 
   return (
